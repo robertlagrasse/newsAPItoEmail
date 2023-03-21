@@ -1,21 +1,22 @@
 # Retrieve news items via API, deliver via email.
 
-import requests
-import json
+import getNews
 import sendMail
+import json
 
-apiKey = "ceff54e923a34b8288a7f82f1ac62727"
-url = "https://newsapi.org/v2/everything?q=Trump&sortBy=publishedAt&apiKey=ceff54e923a34b8288a7f82f1ac62727"
+subject = "pandas"
+articles = getNews.retrieve(subject)
 
-request = requests.get(url)
-content = request.json()
-
+print(json.dumps(articles[0], indent=4))
 body = "Subject: News of the Day!\n"
-for article in content['articles']:
-    title = article['title']
-    description = article['description']
+for article in articles:
+    title = str(article['title'])
+    description = str(article['description'])
+    link = str(article['url'])
+
     body = body + f"Title: {title}\n" \
-                  f"{description}\n\n"
+                  f"{description}\n" \
+                  f"{link}\n\n"
 
 body = body.encode('ascii','ignore')
 
