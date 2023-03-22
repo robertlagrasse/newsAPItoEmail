@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import json
 import getNews
 
@@ -8,14 +9,20 @@ with open('data/newsApiKeyFile.json') as f:
 
 st.set_page_config(layout="wide")
 
-col1, col2 = st.columns(2)
+col1, col2 = st.columns([1, 4])
 with col1:
-    st.image('images/photo.png', use_column_width=False)
+    st.image('images/photo.png', use_column_width=True)
+    st.image('images/musk.jpg', use_column_width=True)
+    st.markdown('<p style="text-align: center;">News API Documentation</p>', unsafe_allow_html=True)
+
+
 with col2:
     st.title('News Browser')
-    with open('data/manifesto.txt', 'r') as f:
-        content = f.read()
-    st.write(content)
+    with open('data/manifesto.txt') as file:
+        st.write(file.read())
+    components.iframe('https://newsapi.org/docs',
+                      height=600,
+                      scrolling=True)
 
 with st.form(key='form', clear_on_submit=True):
     subject = st.text_input("Pick a news topic")
