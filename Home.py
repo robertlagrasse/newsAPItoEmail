@@ -41,6 +41,7 @@ if submit:
             except:
                 st.image('images/photo.png')
             st.write(str(article['description']))
+            st.write(str(article['url']))
     with col4:
         for article in articles[1::3]:
             st.title(str(article['title']))
@@ -49,6 +50,7 @@ if submit:
             except:
                 st.image('images/photo.png')
             st.write(str(article['description']))
+            st.write(str(article['url']))
     with col5:
         for article in articles[2::3]:
             st.title(str(article['title']))
@@ -57,3 +59,4 @@ if submit:
             except:
                 st.image('images/photo.png')
             st.write(str(article['description']))
+            st.write(str(article['url']))
